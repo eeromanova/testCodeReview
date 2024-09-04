@@ -1,0 +1,8 @@
+.container{
+    display: flex;
+    width: 100%;
+
+}
+.output_container{
+    width: 50vw;
+}
