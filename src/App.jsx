@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="app">
 
-      <CodeEditor taskIndex={1} />
+      <CodeEditor taskIndex={0} />
     </div>
   );
 }
