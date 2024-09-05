@@ -1,27 +1,28 @@
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 2em;
-  grid-template-areas: "task code" "task code" "output code";
+  grid-template-areas: "task code" "task output";
   width: 90%;
-  height: 100%;
+  height: 80vh;
   margin: 2em;
 }
 .taskcontainer {
-  grid-area: "task";
+  grid-area: task;
   padding: 1em;
   border-radius: 30px;
   border: 2px solid rgb(238, 93, 128);
 }
 .codecontainer {
-  grid-area: "code";
+  grid-area: code;
   padding: 1em;
   border-radius: 30px;
   border: 2px solid rgb(238, 93, 128);
 }
 
 .answercontainer {
-  grid-area: "output";
+  grid-area: output;
   padding: 1em;
   border-radius: 30px;
   border: 2px solid rgb(238, 93, 128);
