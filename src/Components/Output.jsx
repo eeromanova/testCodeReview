@@ -5,8 +5,7 @@ import tasks from "../tasks.json";
 
 export default function Output({ code, language, version, taskIndex }) {
   const answers = tasks[taskIndex].results;
-  const preparedCode = code.toString().replace("\n", "");
-  const codeArr = preparedCode.split("");
+  const codeArr = code.split(" ");
   console.log(answers);
   console.log(codeArr);
   const isCodeHasMustHave = [];
