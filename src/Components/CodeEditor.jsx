@@ -2,26 +2,34 @@ import { Editor } from "@monaco-editor/react";
 import styles from "./CodeBox.module.css";
 import { useState } from "react";
 import Output from "./Output";
+import tasks from "../tasks.json";
 
-export default function CodeEditor() {
+export default function CodeEditor({ taskIndex }) {
   const LANGUAGE = "javascript";
   const LANGUAGE_VERSION = "18.15.0";
   const [value, setValue] = useState("");
   return (
     <div className={styles.container}>
-      <div>
-        <p>{LANGUAGE}</p>
+      <div className={styles.taskcontainer}>
+        <h2 className={styles.taskheader}>{tasks[taskIndex].name}</h2>
+        <p className={styles.tasktext}>{tasks[taskIndex].text}</p>
+      </div>
+      <div className={styles.codecontainer}>
         <Editor
-          height="90vh"
-          width="50vw"
           defaultLanguage={LANGUAGE}
-          defaultValue="// some comment"
+          defaultValue={tasks[taskIndex].defaultValue}
           onChange={(value) => setValue(value)}
           value={value}
         />
       </div>
-
-      <Output code={value} language={LANGUAGE} version={LANGUAGE_VERSION} />
+      <div className={styles.answercontainer}>
+        <Output
+          code={value}
+          language={LANGUAGE}
+          version={LANGUAGE_VERSION}
+          taskIndex={taskIndex}
+        />
+      </div>
     </div>
   );
 }
