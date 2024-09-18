@@ -1,48 +1,34 @@
 import ExecuteCode from "./api";
 import { useState } from "react";
-import styles from "./CodeBox.module.css";
-import tasks from "../tasks.json";
+// import styles from "./CodeBox.module.css";
+import task10 from "./task_10";
 
-export default function Output({ code, language, version, taskIndex }) {
-  const answers = tasks[taskIndex].results;
-  const codeArr = code.split(" ");
-  console.log(answers);
-  console.log(codeArr);
-  const isCodeHasMustHave = [];
-  tasks[taskIndex].marks.forEach((mark) => {
-    if (codeArr.includes(mark)) isCodeHasMustHave.push(mark);
-  });
+export default function Output({ code, language, version }) {
   const [output, setOutput] = useState(null);
   const [error, setError] = useState(null);
+  const [message, setMessage] = useState("");
+
+  const checkValid = async () => {
+    try {
+      const { message } = task10(code);
+      setMessage(message);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const runCode = async () => {
     setError(null);
     setOutput(null);
+    setMessage("");
     if (!code) return;
     try {
       const { run: result } = await ExecuteCode(language, version, code);
-      const results = [result.output];
-      console.log(results);
-      const isEqual = results.every(
-        (element, index) => element === answers[index]
-      );
       if (result.stderr !== "") {
-        setError(
-          `Что-то пошло не так! Сообщение об  ошибке:\n ${result.stderr}`
-        );
-      } else if (
-        isEqual &&
-        isCodeHasMustHave.length === tasks[taskIndex].marks.length
-      ) {
-        console.log("Верный результат");
-        setOutput(`Console.log: ${result.output}`);
-      } else if (isCodeHasMustHave.length !== tasks[taskIndex].marks.length) {
-        setError(
-          "В твоем решении выполнены не все требуемые условия. Проверь еще раз задание и попробуй еще!"
-        );
-      } else if (!isEqual) {
-        setError(
-          `${result.output}. Полученный результат отличается от нужного. Проверь еще раз задание и попробуй еще!`
-        );
+        setMessage(`Что-то пошло не так! Сообщение об  ошибке:`);
+        setError(result.stderr);
+      } else {
+        await checkValid();
+        setOutput(result.output);
       }
     } catch (e) {
       console.log(e);
@@ -56,11 +42,12 @@ export default function Output({ code, language, version, taskIndex }) {
         {output && (
           <>
             <p>{output}</p>
-            <p>Поздравляем, ты получила верный результат</p>
+            <p>{message}</p>
           </>
         )}
         {error && (
           <>
+            <p>{message}</p>
             <p>{error}</p>
           </>
         )}
