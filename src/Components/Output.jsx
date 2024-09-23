@@ -1,16 +1,20 @@
 import ExecuteCode from "./api";
-import { useState } from "react";
-// import styles from "./CodeBox.module.css";
-import task10 from "./task_10";
+import { useState, useEffect } from "react";
+import taskValidation from "./taskValidation";
 
-export default function Output({ code, language, version }) {
-  const [output, setOutput] = useState(null);
-  const [error, setError] = useState(null);
+export default function Output({ code, language, version, taskIndex }) {
+  const [output, setOutput] = useState("");
+  const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
+  useEffect(() => {
+    setError("");
+    setMessage("");
+    setOutput("");
+  }, [taskIndex]);
   const checkValid = async () => {
     try {
-      const { message } = task10(code);
+      const { message } = taskValidation(code, taskIndex);
       setMessage(message);
     } catch (e) {
       console.log(e);
@@ -26,9 +30,11 @@ export default function Output({ code, language, version }) {
       if (result.stderr !== "") {
         setMessage(`Что-то пошло не так! Сообщение об  ошибке:`);
         setError(result.stderr);
-      } else {
+      } else if (result.output !== "") {
         await checkValid();
         setOutput(result.output);
+      } else {
+        setError(`Что-то пошло не так! Попробуй еще раз`);
       }
     } catch (e) {
       console.log(e);

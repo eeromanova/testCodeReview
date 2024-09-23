@@ -4,8 +4,7 @@ import CodeEditor from "./Components/CodeEditor";
 function App() {
   return (
     <div className="app">
-
-      <CodeEditor taskIndex={1} />
+      <CodeEditor />
     </div>
   );
 }
