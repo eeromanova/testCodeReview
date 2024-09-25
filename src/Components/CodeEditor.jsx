@@ -7,19 +7,19 @@ import tasks from "../tasks.json";
 export default function CodeEditor() {
   const LANGUAGE = "javascript";
   const LANGUAGE_VERSION = "18.15.0";
-  const [value, setValue] = useState("");
   const [task, setTask] = useState(0);
+  const [value, setValue] = useState(tasks[task].defaultValue);
 
   const taskNext = () => {
     if (task !== tasks.length - 1) {
       setTask(task + 1);
-      setValue("");
+      setValue(tasks[task+1].defaultValue);
     }
   };
   const taskPrev = () => {
     if (task !== 0) {
       setTask(task - 1);
-      setValue("");
+      setValue(tasks[task-1].defaultValue);
     }
     return;
   };
@@ -33,7 +33,6 @@ export default function CodeEditor() {
         <div className={styles.codecontainer}>
           <Editor
             defaultLanguage={LANGUAGE}
-            defaultValue={tasks[task].defaultValue}
             onChange={(value) => setValue(value)}
             value={value}
           />
