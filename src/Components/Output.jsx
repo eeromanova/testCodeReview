@@ -1,6 +1,6 @@
 import ExecuteCode from "./api";
 import { useState, useEffect } from "react";
-import taskValidation from "./taskValidation";
+import taskValidation from "../tasksValidation/datesAndConditions/datesValidation";
 
 export default function Output({ code, language, version, taskIndex }) {
   const [output, setOutput] = useState("");

@@ -1,33 +1,8 @@
-function evalFunction(value) {
-  let result;
-  const originalLog = console.log;
-  console.log = (output) => {
-    result = output;
-  };
-  const fn = new Function(value);
-  fn();
-  console.log = originalLog;
-  return result;
-}
-function renderEvalResult(value) {
-  let consoleValue;
-  try {
-    consoleValue = evalFunction(value);
-    console.log(consoleValue);
-  } catch (e) {
-    consoleValue = e.toString();
-  }
-
-  return consoleValue;
-}
+import renderEvalResult from "../common/renderEvalResult";
+import checkIfElse from "../common/checkIfElse";
+import checkSwitchCase from "../common/checkSwitchCase";
 
 let result = "";
-let keyWords = [];
-function checkKeyWords(value) {
-  keyWords = value.match(/(if|else)/g);
-  console.log(keyWords);
-  return keyWords;
-}
 const task1 = () => {
   const currentDate = new Date();
   result = currentDate;
@@ -124,13 +99,26 @@ const task17 = () => {
   return result;
 };
 
-const task18 = () => {
+const taskAnswerTrue = () => {
   result = "true";
+  return result;
+};
+const taskAnswerFalse = () => {
+  result = "false";
+  return result;
+};
+const task27 = () => {
+  result = "Среда";
+  return result;
+};
+const task28 = () => {
+  result = "Запад";
   return result;
 };
 
 export default function task(value, taskIndex) {
   const consoleValue = renderEvalResult(value);
+  let checkKeyWords;
   switch (taskIndex) {
     case 0:
       task1();
@@ -172,33 +160,102 @@ export default function task(value, taskIndex) {
       task17();
       break;
     case 17:
-      checkKeyWords(value);
-      console.log(keyWords);
-      if (keyWords.length!== 2) {
-        result='false';
-        console.log(result);
+      checkKeyWords = checkIfElse(value, 2);
+      if (!checkKeyWords) {
+        result = "false";
       } else {
-        task18();
+        taskAnswerTrue();
+      }
+      break;
+    case 18:
+      checkKeyWords = checkIfElse(value, 2);
+      if (!checkKeyWords) {
+        result = "false";
+      } else {
+        taskAnswerFalse();
+      }
+      break;
+    case 19:
+      checkKeyWords = checkIfElse(value, 2);
+      if (!checkKeyWords) {
+        result = "false";
+      } else {
+        taskAnswerTrue();
+      }
+      break;
+    case 20:
+      checkKeyWords = checkIfElse(value, 2);
+      if (!checkKeyWords) {
+        result = "false";
+      } else {
+        taskAnswerFalse();
+      }
+      break;
+    case 21:
+      checkKeyWords = checkIfElse(value, 2);
+      if (!checkKeyWords) {
+        result = "false";
+      } else {
+        taskAnswerFalse();
+      }
+      break;
+    case 22:
+      checkKeyWords = checkIfElse(value, 2);
+      if (!checkKeyWords) {
+        result = "false";
+      } else {
+        taskAnswerTrue();
+      }
+      break;
+    case 23:
+      checkKeyWords = checkIfElse(value, 2);
+      if (!checkKeyWords) {
+        result = "false";
+      } else {
+        taskAnswerTrue();
+      }
+      break;
+    case 24:
+      checkKeyWords = checkIfElse(value, 2);
+      if (!checkKeyWords) {
+        result = "false";
+      } else {
+        taskAnswerTrue();
+      }
+      break;
+    case 25:
+      checkKeyWords = checkIfElse(value, 2);
+      if (!checkKeyWords) {
+        result = "false";
+      } else {
+        taskAnswerTrue();
+      }
+      break;
+    case 26:
+      checkKeyWords = checkSwitchCase(value, 8);
+      if (!checkKeyWords) {
+        result = "false";
+      } else {
+        task27();
+      }
+      break;
+    case 27:
+      checkKeyWords = checkSwitchCase(value, 5);
+      if (!checkKeyWords) {
+        result = "false";
+      } else {
+        task28();
       }
       break;
   }
-  console.log(consoleValue);
-  console.log(typeof consoleValue);
-  console.log(consoleValue.toString());
-  console.log(result);
-  console.log(result.toString());
+
   const isResultValid =
     consoleValue.toString() === result.toString() &&
     consoleValue.toString() !== `Invalid Date`;
-  console.log(consoleValue.toString() === result.toString());
-  console.log(consoleValue.toString() !== `Invalid Date`);
-  console.log(isResultValid);
+
   const isObjectValid =
     typeof consoleValue === "object" &&
     consoleValue.toString() !== `Invalid Date`;
-  console.log(typeof consoleValue === "object");
-  console.log(consoleValue.toString() !== `Invalid Date`);
-  console.log(isObjectValid);
 
   return {
     valid: result === "" ? isObjectValid : isResultValid,

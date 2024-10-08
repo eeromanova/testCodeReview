@@ -2,7 +2,7 @@ import { Editor } from "@monaco-editor/react";
 import styles from "./CodeBox.module.css";
 import { useState } from "react";
 import Output from "./Output";
-import tasks from "../tasks.json";
+import tasks from "../tasks/tasksClasses.json";
 
 export default function CodeEditor() {
   const LANGUAGE = "javascript";

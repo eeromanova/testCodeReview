@@ -1,0 +1,9 @@
+[
+  {
+    "theme": "classes",
+    "name": "Задание 1",
+    "id": "1",
+    "text": "Создайте класс Worker. Класс должен содержать свойства name, surname. Создайте на его основе объект worker. Выведите в консоль созданный объект.",
+    "defaultValue": "const worker = new Worker('Имя', 'Фамилия');\nconsole.log(worker);"
+  }
+]
