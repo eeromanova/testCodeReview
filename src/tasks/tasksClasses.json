@@ -5,5 +5,33 @@
     "id": "1",
     "text": "Создайте класс Worker. Класс должен содержать свойства name, surname. Создайте на его основе объект worker. Выведите в консоль созданный объект.",
     "defaultValue": "const worker = new Worker('Имя', 'Фамилия');\nconsole.log(worker);"
+  },
+  {
+    "theme": "classes",
+    "name": "Задание 2",
+    "id": "2",
+    "text": "Добавьте в класс Worker метод fullName, который будет возвращать полное имя работника в формате 'Фамилия, Имя'. Создайте объект worker на основе класса Worker и выведите его полное имя в консоль с помощью метода fullName",
+    "defaultValue": "class Worker { \nconstructor(name, surname) {\nthis.name = name;\nthis.surname = surname;\n}\n//ваш код\n}\n//ваш код\nconsole.log()//ваш код"
+  },
+  {
+    "theme": "classes",
+    "name": "Задание 3",
+    "id": "3",
+    "text": "Создайте класс Car. Класс должен содержать свойства brand, model и year. Создайте на его основе объект car и выведите его свойства в консоль.",
+    "defaultValue": ""
+  },
+  {
+    "theme": "classes",
+    "name": "Задание 4",
+    "id": "4",
+    "text": "Добавьте в класс Car метод getAge, который будет возвращать возраст машины (текущий год минус год выпуска,текущий год нужно получить через класc Date). Результат в консоли должен быть типом данных numbers.",
+    "defaultValue": "class Car {\n  constructor(brand, model, year) {\n  this.brand = brand;\n  this.model = model;\n  this.year = year;\n  }\n}\nconst car = new Car('BMW','X6',2023);\nconsole.log(car.getAge());"
+  },
+  {
+    "theme": "classes",
+    "name": "Задание 5",
+    "id": "5",
+    "text": "Cоздайте класс Rectangle. Класс должен содержать свойства width и height. Создайте на его основе объект rectangle и выведите его свойства в консоль.",
+    "defaultValue": ""
   }
 ]
