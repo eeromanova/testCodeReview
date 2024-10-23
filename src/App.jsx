@@ -1,10 +1,10 @@
 import "./App.css";
-import CodeEditor from "./Components/CodeEditor";
+import MainPage from "./components/MainPage/MainPage";
 
 function App() {
   return (
-    <div className="app">
-      <CodeEditor />
+    <div className="app"> 
+      <MainPage />
     </div>
   );
 }

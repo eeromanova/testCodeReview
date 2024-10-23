@@ -2,9 +2,12 @@ import { Editor } from "@monaco-editor/react";
 import styles from "./CodeBox.module.css";
 import { useState } from "react";
 import Output from "./Output";
-import tasks from "../tasks/tasksClasses.json";
+import classes from "../../tasks/classes.json";
+import dates from "../../tasks/dates.json";
 
-export default function CodeEditor() {
+export default function CodeEditor({ theme }) {
+  const allTasks = { classes: classes, dates: dates };
+  const tasks = allTasks[theme];
   const LANGUAGE = "javascript";
   const LANGUAGE_VERSION = "18.15.0";
   const [task, setTask] = useState(0);
@@ -13,13 +16,13 @@ export default function CodeEditor() {
   const taskNext = () => {
     if (task !== tasks.length - 1) {
       setTask(task + 1);
-      setValue(tasks[task+1].defaultValue);
+      setValue(tasks[task + 1].defaultValue);
     }
   };
   const taskPrev = () => {
     if (task !== 0) {
       setTask(task - 1);
-      setValue(tasks[task-1].defaultValue);
+      setValue(tasks[task - 1].defaultValue);
     }
     return;
   };
@@ -43,6 +46,7 @@ export default function CodeEditor() {
             language={LANGUAGE}
             version={LANGUAGE_VERSION}
             taskIndex={task}
+            theme={theme}
           />
         </div>
       </div>

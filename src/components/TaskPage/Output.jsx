@@ -1,11 +1,14 @@
-import ExecuteCode from "./api";
+import ExecuteCode from "../../functions/api";
 import { useState, useEffect } from "react";
-import taskValidation from "../tasksValidation/classes/classesValidation";
+import classes from "../../functions/classesValidation";
+import dates from "../../functions/datesValidation";
 
-export default function Output({ code, language, version, taskIndex }) {
+export default function Output({ code, language, version, taskIndex, theme }) {
   const [output, setOutput] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+  const allValidations = { classes: classes, dates: dates };
+  const taskValidation = allValidations[theme];
 
   useEffect(() => {
     setError("");
@@ -21,8 +24,8 @@ export default function Output({ code, language, version, taskIndex }) {
     }
   };
   const runCode = async () => {
-    setError(null);
-    setOutput(null);
+    setError("");
+    setOutput("");
     setMessage("");
     if (!code) return;
     try {

@@ -7,5 +7,6 @@ export default function evalFunction(value) {
     const fn = new Function(value);
     fn();
     console.log = originalLog;
+    console.log(result);
     return result;
   };
